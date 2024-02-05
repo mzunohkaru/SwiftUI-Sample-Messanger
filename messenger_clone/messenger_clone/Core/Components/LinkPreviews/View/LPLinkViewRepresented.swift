@@ -13,9 +13,13 @@ class CustomLinkView: LPLinkView {
 }
 
 struct LPLinkViewRepresented: UIViewRepresentable {
+
     typealias UIViewType = CustomLinkView
+
+    // リンクのメタデータ（タイトル、イメージなど）を保持するクラス
     var metadata: LPLinkMetadata
     
+    // リンクのプレビューを表示するビューが作成されます
     func makeUIView(context: Context) -> CustomLinkView {
         let linkView = CustomLinkView(metadata: metadata)
         return linkView

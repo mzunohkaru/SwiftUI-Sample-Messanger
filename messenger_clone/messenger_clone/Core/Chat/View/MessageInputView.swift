@@ -9,6 +9,7 @@ import SwiftUI
 import PhotosUI
 
 struct MessageInputView: View {
+    
     @Binding var messageText: String
     @ObservedObject var viewModel: ChatViewModel
     

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct LinkPreview: View {
+
     @StateObject var viewModel: LinkPreviewViewModel
     
     init(urlString: String) {
@@ -15,10 +16,14 @@ struct LinkPreview: View {
     }
     
     var body: some View {
+
+        // viewModelからメタデータが取得できた場合
         if let metadata = viewModel.metadata {
+            // メタデータを受け取り、それを基にリンクのプレビューを表示するカスタムビュー
             LPLinkViewRepresented(metadata: metadata)
                 .frame(width: UIScreen.main.bounds.width - 100, height: 250)
         } else {
+            // 開発中にXcodeのプレビューキャンバスでこのビューをプレビューするためのコード
             ProgressView()
                 .frame(width: UIScreen.main.bounds.width - 100, height: 250)
         }

@@ -9,6 +9,7 @@ import SwiftUI
 import FirebaseAuth
 
 class LoginViewModel: ObservableObject {
+    
     @Published var email = ""
     @Published var password = ""
     @Published var showAlert = false

@@ -45,5 +45,24 @@ enum SettingsOptionsViewModel: Int, CaseIterable, Identifiable {
         }
     }
     
+    var action: Void {
+        switch self {
+        case .darkMode:
+        let isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
+        UserDefaults.standard.set(!isDarkMode, forKey: "isDarkMode")
+        UIApplication.shared.windows.forEach { window in
+            window.overrideUserInterfaceStyle = isDarkMode ? .light : .dark
+        }
+        case .activeStatus:
+            print("DEBUG: \(self)")
+        case .accessibility:
+            print("DEBUG: \(self)")
+        case .privacy:
+            print("DEBUG: \(self)")
+        case .notifications:
+            print("DEBUG: \(self)")
+        }
+    }
+    
     var id: Int { return self.rawValue }
 }

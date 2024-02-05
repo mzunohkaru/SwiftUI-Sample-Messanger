@@ -36,6 +36,7 @@ class UserService {
         let query = FirestoreConstants.UsersCollection
         
         if let limit {
+            // 取得する最大数を設定
             let snapshot = try await query.limit(to: limit).getDocuments()
             return mapUsers(fromSnapshot: snapshot, currentUid: currentUid)
         }
@@ -60,7 +61,7 @@ class UserService {
     private static func mapUsers(fromSnapshot snapshot: QuerySnapshot, currentUid: String) -> [User] {
         return snapshot.documents
             .compactMap({ try? $0.data(as: User.self) })
-            .filter({ $0.id !=  currentUid })
+            .filter({ $0.id !=  currentUid }) // 現在のユーザー以外を配列に格納
     }
 }
 

@@ -34,9 +34,13 @@ class ChatService {
         self.firestoreListener = query.addSnapshotListener { [weak self] snapshot, _ in
             // snapshotからドキュメントの変更を取得し、その中から新たに追加されたもの（.added）だけをフィルタリングします
             guard let changes = snapshot?.documentChanges.filter({ $0.type == .added }) else { return }
+            
             // フィルタリングしたデータから、1つずつメッセージのデータを取り出し、それをMessage型のオブジェクトに変換
             var messages = changes.compactMap{ try? $0.document.data(as: Message.self) }
+            
             // 取得したメッセージのリストをループし、現在のユーザーからのメッセージでないもの（つまり、チャットパートナーからのメッセージ）を特定
+            // enumerated() : 配列messagesの各要素messageとそのインデックスindexを出力します.
+            //                ループ内で要素の位置を知る必要がある場合に便利
             for (index, message) in messages.enumerated() where message.fromId != currentUid {
                 // 特定したメッセージのユーザー情報を、チャットパートナーの情報で更新
                 messages[index].user = self?.chatPartner
@@ -51,9 +55,11 @@ class ChatService {
     }
     
     func sendMessage(type: MessageSendType) async throws {
+
         switch type {
         case .text(let messageText), .link(let messageText):
             uploadMessage(messageText)
+            
         case .image(let uIImage):
             let imageUrl = try await ImageUploader.uploadImage(image: uIImage, type: .message)
             uploadMessage("Attachment: Image", imageUrl: imageUrl)

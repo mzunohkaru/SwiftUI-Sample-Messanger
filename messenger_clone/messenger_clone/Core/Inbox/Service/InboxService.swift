@@ -14,6 +14,7 @@ class InboxService {
     
     static let shared = InboxService()
     
+    //  Firestoreの特定のコレクションやドキュメントの変更をリアルタイムで監視するためのリスナー
     private var firestoreListener: ListenerRegistration?
     
     // need to call this thru shared instance to setup the observer
@@ -42,9 +43,13 @@ class InboxService {
         
         let snapshot = try await FirestoreConstants.MessagesCollection.document(uid).collection(chatPartnerId).getDocuments()
         
+        // withThrowingTaskGroup : 複数の非同期タスクを並行して実行が可能
+        // (of: Void.self) : Void型の結果を持つタスクグループを作成
         await withThrowingTaskGroup(of: Void.self) { group in
             for doc in snapshot.documents {
+                // タスクグループに新しいタスクを追加
                 group.addTask {
+                    // メッセージデータを削除
                     try await FirestoreConstants.MessagesCollection
                         .document(uid)
                         .collection(chatPartnerId)

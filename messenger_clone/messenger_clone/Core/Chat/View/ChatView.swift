@@ -52,6 +52,7 @@ struct ChatView: View {
                 .onChange(of: viewModel.messages) { newValue in
                     guard  let lastMessage = newValue.last else { return }
                     
+                    // 指定されたID （この場合はlastMessage.id） を持つビューまでスクロールします
                     withAnimation(.spring()) {
                         proxy.scrollTo(lastMessage.id)
                     }

@@ -28,7 +28,9 @@ class InboxViewModel: ObservableObject {
     }
     
     var didCompleteInitialLoad = false
+
     private var firestoreListener: ListenerRegistration?
+
     private var cancellables = Set<AnyCancellable>()
     
     init() {
@@ -45,6 +47,7 @@ class InboxViewModel: ObservableObject {
         
         // 新しいドキュメントの変更が発行されるたびにクロージャを実行
         InboxService.shared.$documentChanges.sink { [weak self] changes in
+            // クロージャが[weak self]キャプチャリストを使用している場合、selfは弱参照となり、nilになる可能性があります
             guard let self = self, !changes.isEmpty else { return }
             
             if !self.didCompleteInitialLoad {
@@ -65,15 +68,20 @@ class InboxViewModel: ObservableObject {
         self.recentMessages = changes.compactMap{ try? $0.document.data(as: Message.self) }
         
         for i in 0 ..< recentMessages.count {
-            // 取得したユーザー情報をメッセージに関連付け
+            
             let message = recentMessages[i]
             
             // メッセージのパートナーのユーザー情報を取得
             UserService.fetchUser(withUid: message.chatPartnerId) { [weak self] user in
+                // self が nil でないことを確認
                 guard let self else { return }
+                // 取得したユーザー情報をメッセージに関連付け
                 self.recentMessages[i].user = user
                 
+                // 初期メッセージの読み込みが完了したかどうかを追跡するために使用
+                // recentMessages.count - 1 : 配列の最後の要素のインデックス
                 if i == self.recentMessages.count - 1 {
+                    // 最後の要素に到達している場合
                     self.didCompleteInitialLoad = true
                 }
             }
@@ -94,20 +102,28 @@ class InboxViewModel: ObservableObject {
         guard var message = try? change.document.data(as: Message.self) else { return }
         
         UserService.fetchUser(withUid: message.chatPartnerId) { user in
+            // チャットパートナーの情報をメッセージのユーザー情報に設定
             message.user = user
-            self.recentMessages.insert(message, at: 0)
+            // recentMessages 配列の先頭に message オブジェクトを挿入する
+            self.recentMessages.insert(message, at: 0) // at: 0 : 配列の最初の位置
         }
     }
     
     private func updateMessagesFromExisitingConversation(fromChange change: DocumentChange) {
+        // Messageオブジェクトに変換
         guard var message = try? change.document.data(as: Message.self) else { return }
+        // recentMessages配列内で、変更されたメッセージのchatPartnerIdが一致する最初のメッセージのインデックスを検索
         guard let index = self.recentMessages.firstIndex(where: {
             $0.user?.id ?? "" == message.chatPartnerId
         }) else { return }
+
+        // 見つかったメッセージのユーザー情報を、変更されたメッセージに設定
         guard let user = self.recentMessages[index].user else { return }
         message.user = user
         
+        // recentMessages配列から、変更されたメッセージを削除
         self.recentMessages.remove(at: index)
+        // 変更されたメッセージをrecentMessages配列の先頭に挿入
         self.recentMessages.insert(message, at: 0)
     }
     
@@ -116,7 +132,7 @@ class InboxViewModel: ObservableObject {
             recentMessages.removeAll(where: { $0.id == message.id })
             try await InboxService.deleteMessage(message)
         } catch {
-            // TODO: If deletion fails add message back at original index
+
         }
     }
 }

@@ -12,11 +12,7 @@ extension Color {
 }
 
 struct Theme {
-    //    let primaryText = Color("PrimaryTextColor")
-    //    let background = Color("BackgroundColor")
-    //    let secondaryBackground = Color("SecondaryBackground")
-    
-    let primaryText = Color(.black)
-    let background = Color(.white)
+    let primaryText = Color("PrimaryTextColor")
+    let background = Color("BackgroundColor")
     let secondaryBackground = Color(.systemGray5)
 }

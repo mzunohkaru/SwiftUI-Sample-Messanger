@@ -7,7 +7,9 @@
 
 import SwiftUI
 
+// PreferenceKey : ScrollViewのオフセット値を管理するために使用されます
 struct ScrollViewOffsetPreferenceKey: PreferenceKey {
+  // オフセットの初期値 = 0
   static var defaultValue = CGFloat.zero
 
   static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {

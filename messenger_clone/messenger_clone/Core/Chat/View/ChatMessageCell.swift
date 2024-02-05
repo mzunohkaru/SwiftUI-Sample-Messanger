@@ -17,6 +17,7 @@ struct ChatMessageCell: View {
         self.nextMessage = nextMessage
     }
     
+    // メッセージ相手のアイコン画像の表示・非表示の管理
     private var shouldShowChatPartnerImage: Bool {
         if nextMessage == nil && !message.isFromCurrentUser { return true }
         guard let next = nextMessage else { return message.isFromCurrentUser }

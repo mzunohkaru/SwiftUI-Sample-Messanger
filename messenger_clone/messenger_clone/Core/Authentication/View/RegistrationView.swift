@@ -65,6 +65,7 @@ struct RegistrationView: View {
             }
             .padding(.vertical, 16)
         }
+        // Error Alert
         .alert(isPresented: $viewModel.showAlert) {
             Alert(title: Text("Error"),
                   message: Text(viewModel.authError?.description ?? ""))

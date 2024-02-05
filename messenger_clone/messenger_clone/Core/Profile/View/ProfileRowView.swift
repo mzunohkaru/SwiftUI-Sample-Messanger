@@ -8,21 +8,23 @@
 import SwiftUI
 
 struct ProfileRowView: View {
+    
     let viewModel: SettingsOptionsViewModel
     
     var body: some View {
-        HStack(spacing: 12) {
-            Image(systemName: viewModel.imageName)
-                .resizable()
-                .frame(width: 28, height: 28)
-                .foregroundStyle(Color.theme.background, viewModel.imageBackgroundColor)
-            
-            Text(viewModel.title)
-                .font(.subheadline)
+        Button {
+            viewModel.action
+        } label: {
+            HStack(spacing: 12) {
+                Image(systemName: viewModel.imageName)
+                    .resizable()
+                    .frame(width: 28, height: 28)
+                    .foregroundStyle(Color.theme.background, viewModel.imageBackgroundColor)
+                
+                Text(viewModel.title)
+                    .font(.subheadline)
+                    .foregroundColor(.black)
+            }
         }
     }
 }
-
-//#Preview {
-//    ProfileRowView()
-//}

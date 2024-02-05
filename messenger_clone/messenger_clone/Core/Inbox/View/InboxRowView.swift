@@ -60,6 +60,23 @@ struct InboxRowView: View {
                 .tint(Color(.systemRed))
             }
         })
+        .contextMenu(menuItems: {
+            Button {
+                
+            } label: {
+                InboxRowMenuButton(title: "Mute", image: "speaker.slash")
+            }
+            Button {
+                
+            } label: {
+                InboxRowMenuButton(title: "Attention", image: "arrow.up.bin")
+            }
+            Button {
+                
+            } label: {
+                InboxRowMenuButton(title: "Delete", image: "trash")
+            }
+        })
     }
 }
 
@@ -68,3 +85,18 @@ struct InboxRowView_Previews: PreviewProvider {
         InboxRowView(message: dev.messages[0], viewModel: InboxViewModel())
     }
 }
+
+struct InboxRowMenuButton: View {
+    
+    let title: String
+    let image: String
+    
+    var body: some View {
+        HStack {
+            Text(title)
+            Spacer()
+            Image(systemName: image)
+        }
+    }
+}
+

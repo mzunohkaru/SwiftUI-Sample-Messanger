@@ -10,6 +10,7 @@ import Firebase
 struct MessageService {
     static func updateMessageStatusIfNecessary(_ messages: [Message]) async throws {
         guard let uid = Auth.auth().currentUser?.uid else { return }
+        // messages配列の最後のデータが、readされていない場合
         guard let lastMessage = messages.last, !lastMessage.read else { return }
         
         try await FirestoreConstants.MessagesCollection
