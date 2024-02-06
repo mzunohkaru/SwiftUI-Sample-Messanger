@@ -22,6 +22,7 @@
 		8F1B9D852B70AE5300E03E0D /* LPLinkViewRepresented.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1B9D842B70AE5300E03E0D /* LPLinkViewRepresented.swift */; };
 		8F1B9D872B70AE6600E03E0D /* LinkPreviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1B9D862B70AE6600E03E0D /* LinkPreviewViewModel.swift */; };
 		8F1B9D8A2B70AF1800E03E0D /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 8F1B9D892B70AF1800E03E0D /* FirebaseStorage */; };
+		8FA3D9772B71C47A005F72BA /* ContextMenuOptionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA3D9762B71C47A005F72BA /* ContextMenuOptionsViewModel.swift */; };
 		8FE9E60A2B5E50FB00670C5B /* messenger_cloneApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE9E6092B5E50FB00670C5B /* messenger_cloneApp.swift */; };
 		8FE9E60C2B5E50FB00670C5B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE9E60B2B5E50FB00670C5B /* ContentView.swift */; };
 		8FE9E60E2B5E50FE00670C5B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8FE9E60D2B5E50FE00670C5B /* Assets.xcassets */; };
@@ -96,6 +97,7 @@
 		8F1B9D822B70AE3700E03E0D /* LinkPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkPreview.swift; sourceTree = "<group>"; };
 		8F1B9D842B70AE5300E03E0D /* LPLinkViewRepresented.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LPLinkViewRepresented.swift; sourceTree = "<group>"; };
 		8F1B9D862B70AE6600E03E0D /* LinkPreviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkPreviewViewModel.swift; sourceTree = "<group>"; };
+		8FA3D9762B71C47A005F72BA /* ContextMenuOptionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextMenuOptionsViewModel.swift; sourceTree = "<group>"; };
 		8FE9E6062B5E50FB00670C5B /* messenger_clone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = messenger_clone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FE9E6092B5E50FB00670C5B /* messenger_cloneApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = messenger_cloneApp.swift; sourceTree = "<group>"; };
 		8FE9E60B2B5E50FB00670C5B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -444,6 +446,7 @@
 			isa = PBXGroup;
 			children = (
 				8FFAA4C92B63AF7400A4FFC4 /* InboxViewModel.swift */,
+				8FA3D9762B71C47A005F72BA /* ContextMenuOptionsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -665,6 +668,7 @@
 				8FFAA4E02B6532EF00A4FFC4 /* InboxService.swift in Sources */,
 				8FFAA4DD2B64A13700A4FFC4 /* Constants.swift in Sources */,
 				8F1B9D852B70AE5300E03E0D /* LPLinkViewRepresented.swift in Sources */,
+				8FA3D9772B71C47A005F72BA /* ContextMenuOptionsViewModel.swift in Sources */,
 				8FE9E6452B5E97AD00670C5B /* ChatMessageCell.swift in Sources */,
 				8FE9E6472B5E9D2600670C5B /* ChatBubble.swift in Sources */,
 				8FE9E6402B5E762000670C5B /* CircularProfileImageView.swift in Sources */,

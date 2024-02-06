@@ -61,20 +61,12 @@ struct InboxRowView: View {
             }
         })
         .contextMenu(menuItems: {
-            Button {
-                
-            } label: {
-                InboxRowMenuButton(title: "Mute", image: "speaker.slash")
-            }
-            Button {
-                
-            } label: {
-                InboxRowMenuButton(title: "Attention", image: "arrow.up.bin")
-            }
-            Button {
-                
-            } label: {
-                InboxRowMenuButton(title: "Delete", image: "trash")
+            ForEach(ContextMenuOptionsViewModel.allCases) { viewModel in
+                Button {
+                    print(viewModel.action)
+                } label: {
+                    ContextMenuItem(title: viewModel.title, image: viewModel.imageName)
+                }
             }
         })
     }
@@ -86,7 +78,7 @@ struct InboxRowView_Previews: PreviewProvider {
     }
 }
 
-struct InboxRowMenuButton: View {
+struct ContextMenuItem: View {
     
     let title: String
     let image: String
@@ -96,6 +88,7 @@ struct InboxRowMenuButton: View {
             Text(title)
             Spacer()
             Image(systemName: image)
+                .foregroundColor(Color(.systemRed))
         }
     }
 }

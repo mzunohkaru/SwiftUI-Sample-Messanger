@@ -32,6 +32,7 @@ struct ChatMessageCell: View {
                 switch message.contentType {
                 case .image(let imageUrl):
                     MessageImageView(imageUrlString: imageUrl)
+                    
                 case .text(let messageText):
                     Text(messageText)
                         .font(.subheadline)
@@ -41,6 +42,7 @@ struct ChatMessageCell: View {
                         .clipShape(ChatBubble(isFromCurrentUser: true, shouldRoundAllCorners: false))
                         .frame(maxWidth: UIScreen.main.bounds.width / 1.5, alignment: .trailing)
                         .padding(.horizontal)
+                    
                 case .link(let urlString):
                     LinkPreview(urlString: urlString)
                         .padding(.horizontal)
@@ -55,6 +57,7 @@ struct ChatMessageCell: View {
                     case .image(let imageUrl):
                         MessageImageView(imageUrlString: imageUrl)
                             .padding(.leading, shouldShowChatPartnerImage ? 0 : 32)
+                        
                     case .text(let messageText):
                         Text(messageText)
                             .font(.subheadline)

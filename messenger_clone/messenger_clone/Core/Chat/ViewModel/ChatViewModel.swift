@@ -12,6 +12,7 @@ import PhotosUI
 import SwiftUI
 
 class ChatViewModel: ObservableObject {
+    
     @Published var messages = [Message]()
     @Published var selectedItem: PhotosPickerItem? {
         didSet { Task { try await loadImage() } }
@@ -40,6 +41,7 @@ class ChatViewModel: ObservableObject {
         if let image = uiImage {
             try await service.sendMessage(type: .image(image))
             messageImage = nil
+            uiImage = nil
         } else {
             try await service.sendMessage(type: .text(messageText))
         }

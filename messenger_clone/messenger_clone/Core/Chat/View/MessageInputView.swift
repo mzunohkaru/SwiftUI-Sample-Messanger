@@ -61,6 +61,9 @@ struct MessageInputView: View {
             }
             
             Button {
+                if messageText.isEmpty &&
+                    viewModel.messageImage == nil { return }
+                
                 Task {
                     try await viewModel.sendMessage(messageText)
                     messageText = ""

@@ -23,7 +23,7 @@ struct InboxView: View {
                     .listRowInsets(EdgeInsets())
                     .padding(.bottom)
                     .padding(.horizontal, 8)
-                
+                    
                 ForEach(viewModel.filteredMessages) { recentMessage in
                     ZStack {
                         NavigationLink(value: recentMessage) {
